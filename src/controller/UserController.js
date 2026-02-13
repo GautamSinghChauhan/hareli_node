@@ -63,6 +63,7 @@ const loginUser = async (req, res) => {
   try {
     // Check if user exists
     const user = await User.findOne({ email });
+    // console.log(user);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -74,7 +75,15 @@ const loginUser = async (req, res) => {
     }
 
     // Generate JWT
-    const token = jwt.sign({ userId: user._id,userName : user.email}, 'your-secret-key', { expiresIn: '1h' });
+const token = jwt.sign(
+      {
+        userId: user._id,
+        email: user.email,
+        role: user.role
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
+    );
 
     // Set JWT in cookie
     res.cookie('token', token, { maxAge: 3600000, httpOnly: true });

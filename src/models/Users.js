@@ -13,7 +13,17 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+      role: {
+      type: String,
+      enum: ["SUPER_ADMIN", "ADMIN", "EDITOR", "USER"],
+      default: "USER"
+    },
+    isactive: {
+      type: Boolean,
+      default: true
+    }
+
 },{
   timestamps:true
 });

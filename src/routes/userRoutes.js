@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const UserController = require('../controller/UserController');
-const verifyToken = require('../middlewares/auth.middleware'); // Import the verifyToken middleware
+const { verifyToken } = require('../middlewares/auth.middleware');
+
 
 // User registration route
 router.post('/register', UserController.registerUser);

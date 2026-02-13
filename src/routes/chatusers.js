@@ -2,14 +2,15 @@
 const express = require("express");
 const router = express.Router();
 const { registerChatUser, loginChatUser, getAllUsers, getUserProfile} = require("../controller/chatusers");
-const verifyToken = require("../middlewares/auth.middleware");
+const { verifyToken } = require('../middlewares/auth.middleware');
+
 
 
 
 // Route for registering a new chat user
-router.post("/register", registerChatUser);
-router.post("/login", loginChatUser);
-router.get("/profile", verifyToken, getUserProfile);
+router.post("/chat/register", registerChatUser);
+router.post("/chat/login", loginChatUser);
+router.get("/chat/profile", verifyToken, getUserProfile);
 
  
 router.get("/users", verifyToken, getAllUsers); 
